@@ -19,17 +19,15 @@ const analyticsRoutes = require('./routes/analytics');
 const { errorHandler } = require('./middleware/errorHandler');
 
 const app = express();
-process.on('uncaughtException', (err) => {
-  console.error('UNCAUGHT EXCEPTION:', err.message, err.stack);
-});
 
-process.on('unhandledRejection', (reason) => {
-  console.error('UNHANDLED REJECTION:', reason);
-});
 // Security & middleware
 app.use(helmet());
 app.use(cors({
-  origin: process.env.FRONTEND_URL || 'http://localhost:5173',
+  origin: [
+    process.env.FRONTEND_URL,
+    'https://resolveai-git-main-code-wave2.vercel.app',
+    'http://localhost:5173'
+  ],
   credentials: true
 }));
 app.use(morgan('dev'));
