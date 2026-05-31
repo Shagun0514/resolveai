@@ -4,7 +4,7 @@ import {
   Tooltip, ResponsiveContainer, LineChart, Line, Legend
 } from 'recharts';
 import api from '../services/api';
-import { Analytics } from '../types';
+import { Analytics, Sentiment } from '../types';
 import { categoryIcon, sentimentConfig } from '../utils/helpers';
 import { format } from 'date-fns';
 
@@ -38,12 +38,12 @@ export default function AnalyticsPage() {
     </div>
   );
 
- const sentimentData = (analytics?.by_sentiment || []).map(s => ({
+const sentimentData = (analytics?.by_sentiment || []).map(s => ({
   name: sentimentConfig[s.sentiment as Sentiment]?.label || s.sentiment,
   value: parseInt(s.count),
   icon: sentimentConfig[s.sentiment as Sentiment]?.icon,
-    color: { positive: '#10b981', neutral: '#94a3b8', negative: '#f59e0b', very_negative: '#f43f5e' }[s.sentiment] || '#94a3b8'
-  }));
+  color: { positive: '#10b981', neutral: '#94a3b8', negative: '#f59e0b', very_negative: '#f43f5e' }[s.sentiment as Sentiment] || '#94a3b8'
+}));
 
   const categoryData = (analytics?.by_category || []).map((c, i) => ({
     name: (categoryIcon[c.category] || '') + ' ' + c.category,
