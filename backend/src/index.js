@@ -24,7 +24,7 @@ const app = express();
 app.use(helmet());
 app.use(cors({
   origin: [
-    process.env.FRONTEND_URL,
+    'https://resolveai-3969jo6eo-code-wave2.vercel.app',
     'https://resolveai-git-main-code-wave2.vercel.app',
     'http://localhost:5173'
   ],
