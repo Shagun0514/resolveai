@@ -13,4 +13,8 @@ const pool = new Pool(
       }
 );
 
+pool.on('error', (err) => {
+  console.error('Idle client error:', err.message);
+});
+
 module.exports = pool;
