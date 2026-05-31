@@ -1,7 +1,7 @@
 import { useQuery } from '@tanstack/react-query';
 import {
   BarChart, Bar, PieChart, Pie, Cell, XAxis, YAxis,
-  Tooltip, ResponsiveContainer, LineChart, Line, Legend
+  Tooltip, ResponsiveContainer, LineChart, Line
 } from 'recharts';
 import api from '../services/api';
 import { Analytics, Sentiment } from '../types';
@@ -38,12 +38,15 @@ export default function AnalyticsPage() {
     </div>
   );
 
-const sentimentData = (analytics?.by_sentiment || []).map(s => ({
-  name: sentimentConfig[s.sentiment as Sentiment]?.label || s.sentiment,
-  value: parseInt(s.count),
-  icon: sentimentConfig[s.sentiment as Sentiment]?.icon,
-  color: ({ positive: '#10b981', neutral: '#94a3b8', negative: '#f59e0b', very_negative: '#f43f5e' } as Record<Sentiment, string>)[s.sentiment as Sentiment] || '#94a3b8'
-}));
+const sentimentData = (analytics?.by_sentiment || []).map(s => {
+  const key = s.sentiment as Sentiment;
+  return {
+    name: sentimentConfig[key]?.label || s.sentiment,
+    value: parseInt(s.count),
+    icon: sentimentConfig[key]?.icon,
+    color: { positive: '#10b981', neutral: '#94a3b8', negative: '#f59e0b', very_negative: '#f43f5e' }[key] || '#94a3b8'
+  };
+});
 
   const categoryData = (analytics?.by_category || []).map((c, i) => ({
     name: (categoryIcon[c.category] || '') + ' ' + c.category,
