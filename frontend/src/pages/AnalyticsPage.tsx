@@ -38,10 +38,10 @@ export default function AnalyticsPage() {
     </div>
   );
 
-  const sentimentData = (analytics?.by_sentiment || []).map(s => ({
-    name: sentimentConfig[s.sentiment as any]?.label || s.sentiment,
-    value: parseInt(s.count),
-    icon: sentimentConfig[s.sentiment as any]?.icon,
+ const sentimentData = (analytics?.by_sentiment || []).map(s => ({
+  name: sentimentConfig[s.sentiment as Sentiment]?.label || s.sentiment,
+  value: parseInt(s.count),
+  icon: sentimentConfig[s.sentiment as Sentiment]?.icon,
     color: { positive: '#10b981', neutral: '#94a3b8', negative: '#f59e0b', very_negative: '#f43f5e' }[s.sentiment] || '#94a3b8'
   }));
 
