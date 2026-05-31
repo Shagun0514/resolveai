@@ -4,7 +4,7 @@ import {
   Tooltip, ResponsiveContainer, LineChart, Line, Legend
 } from 'recharts';
 import api from '../services/api';
-import { Analytics } from '../types';
+import { Analytics, Sentiment } from '../types';
 import { categoryIcon, sentimentConfig } from '../utils/helpers';
 import { format } from 'date-fns';
 
