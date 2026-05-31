@@ -1,10 +1,3 @@
-process.on('uncaughtException', (err) => {
-  console.error('UNCAUGHT EXCEPTION:', err.message, err.stack);
-});
-
-process.on('unhandledRejection', (reason) => {
-  console.error('UNHANDLED REJECTION:', reason);
-});
 require('dotenv').config();
 const express = require('express');
 const cors = require('cors');
@@ -19,7 +12,13 @@ const analyticsRoutes = require('./routes/analytics');
 const { errorHandler } = require('./middleware/errorHandler');
 
 const app = express();
+process.on('uncaughtException', (err) => {
+  console.error('UNCAUGHT EXCEPTION:', err.message, err.stack);
+});
 
+process.on('unhandledRejection', (reason) => {
+  console.error('UNHANDLED REJECTION:', reason);
+});
 // Security & middleware
 app.use(helmet());
 app.use(cors({
